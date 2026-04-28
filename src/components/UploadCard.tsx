@@ -316,4 +316,26 @@ const UploadCard = ({ onScanComplete }: { onScanComplete?: (fp: string, match: n
   );
 };
 
+const DetailTile = ({
+  icon,
+  label,
+  value,
+  mono,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  mono?: boolean;
+}) => (
+  <div className="rounded-lg bg-background-alt/50 border border-border p-2.5 hover:border-primary/40 transition-colors">
+    <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
+      {icon}
+      {label}
+    </div>
+    <p className={`mt-1 text-xs text-foreground/90 truncate ${mono ? "font-mono" : "font-medium"}`}>
+      {value}
+    </p>
+  </div>
+);
+
 export default UploadCard;

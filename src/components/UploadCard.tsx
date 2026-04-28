@@ -209,35 +209,101 @@ const UploadCard = ({ onScanComplete }: { onScanComplete?: (fp: string, match: n
                   </p>
                 </div>
               ) : (
-                matchPct !== null && (
+                matchPct !== null && details && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="flex-1 grid grid-cols-2 gap-3"
+                    className="flex-1 flex flex-col gap-3"
                   >
-                    <div className="rounded-xl bg-background-alt/60 border border-primary/30 p-3 flex flex-col justify-center">
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase tracking-wider">
-                        <Fingerprint className="h-3 w-3" /> Fingerprint
+                    {/* Top: Fingerprint + Match */}
+                    <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+                      <div className="sm:col-span-3 rounded-xl bg-background-alt/60 border border-primary/30 p-3 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent pointer-events-none" />
+                        <div className="relative flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                              <Fingerprint className="h-3 w-3 text-primary" /> Fingerprint ID
+                            </div>
+                            <p className="font-mono text-sm text-primary mt-1 truncate">{fingerprint}</p>
+                            <p className="font-mono text-[10px] text-muted-foreground mt-1 truncate">
+                              SHA-256 · {details.sha.slice(0, 24)}…
+                            </p>
+                          </div>
+                          <button
+                            onClick={copyFp}
+                            className="shrink-0 p-1.5 rounded-md border border-primary/30 text-primary hover:bg-primary/10 transition"
+                            title="Copy fingerprint"
+                          >
+                            {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                          </button>
+                        </div>
                       </div>
-                      <p className="font-mono text-sm text-primary mt-1">{fingerprint}</p>
-                    </div>
-                    <div
-                      className={`rounded-xl border p-3 flex flex-col justify-center ${
-                        matchPct >= 80
-                          ? "bg-destructive/10 border-destructive/40"
-                          : "bg-warning/10 border-warning/40"
-                      }`}
-                    >
-                      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">
-                        Match Found
-                      </p>
-                      <p
-                        className={`font-display text-2xl font-bold ${
-                          matchPct >= 80 ? "text-destructive" : "text-warning"
+
+                      <div
+                        className={`sm:col-span-2 rounded-xl border p-3 flex flex-col justify-center ${
+                          matchPct >= 80
+                            ? "bg-destructive/10 border-destructive/40"
+                            : "bg-warning/10 border-warning/40"
                         }`}
                       >
-                        {matchPct}%
-                      </p>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">
+                          Match Confidence
+                        </p>
+                        <div className="flex items-baseline gap-2">
+                          <p
+                            className={`font-display text-2xl font-bold ${
+                              matchPct >= 80 ? "text-destructive" : "text-warning"
+                            }`}
+                          >
+                            {matchPct}%
+                          </p>
+                          <span className="text-[10px] font-mono text-muted-foreground uppercase">
+                            {matchPct >= 80 ? "High Risk" : "Medium"}
+                          </span>
+                        </div>
+                        <div className="mt-1.5 h-1 rounded-full bg-background-alt overflow-hidden">
+                          <div
+                            className={`h-full ${matchPct >= 80 ? "bg-destructive" : "bg-warning"}`}
+                            style={{ width: `${matchPct}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Detail grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      <DetailTile
+                        icon={<Cpu className="h-3 w-3" />}
+                        label="Algorithm"
+                        value={details.algo}
+                      />
+                      <DetailTile
+                        icon={<Hash className="h-3 w-3" />}
+                        label="pHash"
+                        value={details.phash.slice(0, 10)}
+                        mono
+                      />
+                      <DetailTile
+                        icon={<Globe2 className="h-3 w-3" />}
+                        label="Mirrors"
+                        value={`${details.mirrors} found`}
+                      />
+                      <DetailTile
+                        icon={<ShieldCheck className="h-3 w-3" />}
+                        label="Sources"
+                        value={`${details.sources} scanned`}
+                      />
+                    </div>
+
+                    {/* Footer meta */}
+                    <div className="flex items-center justify-between text-[10px] font-mono text-muted-foreground border-t border-border/50 pt-2">
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="h-3 w-3" /> {details.scannedAt} · {details.durationMs}ms
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+                        {details.region}
+                      </span>
                     </div>
                   </motion.div>
                 )

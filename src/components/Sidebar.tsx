@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Upload, Bell, BarChart3, LogOut, Shield } from "lucide-react";
+import { Upload, Bell, BarChart3, LogOut, Shield, Activity } from "lucide-react";
 import Logo from "@/components/Logo";
 import { toast } from "sonner";
 
 const items = [
   { label: "Upload Content", to: "/dashboard", icon: Upload, end: true },
+  { label: "Monitoring", to: "/dashboard/monitoring", icon: Activity },
   { label: "Alerts", to: "/dashboard/alerts", icon: Bell },
   { label: "Analytics", to: "/dashboard/analytics", icon: BarChart3 },
 ];

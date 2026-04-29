@@ -9,6 +9,8 @@ import DashboardLayout from "./components/DashboardLayout.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import AlertsPage from "./pages/AlertsPage.tsx";
 import AnalyticsPage from "./pages/AnalyticsPage.tsx";
+import MonitoringPage from "./pages/MonitoringPage.tsx";
+import RequireAuth from "./components/RequireAuth.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,8 +22,16 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <DashboardLayout />
+              </RequireAuth>
+            }
+          >
             <Route index element={<Dashboard />} />
+            <Route path="monitoring" element={<MonitoringPage />} />
             <Route path="alerts" element={<AlertsPage />} />
             <Route path="analytics" element={<AnalyticsPage />} />
           </Route>

@@ -107,7 +107,7 @@ const Login = () => {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
               {mode === "signup" && (
                 <Field
                   icon={<Sparkles className="h-4 w-4" />}

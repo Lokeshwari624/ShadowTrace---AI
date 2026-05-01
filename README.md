@@ -13,13 +13,17 @@ Digital Echo Probe is a modern web-based application designed to analyze, simula
 🌐 Fully deployed on Vercel for fast global access
 📊 Interactive visualization of outputs
 🔄 Lightweight and optimized performance
+
 ---
+
 🛠️ Tech Stack
 Frontend: HTML, CSS, JavaScript / React (if used)
 Backend: (Optional – add if you used one)
 Deployment: Vercel
 Other Tools: (Add APIs, libraries if any)
+
 ---
+
 📂 Project Structure
 digital-echo-probe/
 │── public/
@@ -29,7 +33,9 @@ digital-echo-probe/
 │   ├── utils/
 │── package.json
 │── README.md
+
 ---
+
 ⚙️ Installation & Setup
 
 Clone the repository:
@@ -44,22 +50,26 @@ npm install
 Run locally:
 
 npm run dev
+
 ---
+
 🚀 Deployment
 
 This project is deployed using Vercel, which allows instant global deployment and preview environments for testing changes efficiently.
 
 To deploy your own version:
-
 Push code to GitHub
 Connect repo to Vercel
 Deploy with one click
+
 ---
+
 🎯 Use Cases
 AI/ML concept visualization
 Hackathon prototypes
 Educational tools for digital systems
 Experimenting with real-time UI interactions
+
 ---
 
 🤝 Contributing
@@ -70,7 +80,9 @@ Fork the repo
 Create a new branch
 Commit your changes
 Submit a Pull Request
+
 ---
+
 📄 License
 
 This project is licensed under the MIT License.

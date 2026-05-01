@@ -211,6 +211,14 @@ const Field = ({
       placeholder={placeholder}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      autoComplete={type === "password" ? "new-password" : "off"}
+      autoCorrect="off"
+      autoCapitalize="off"
+      spellCheck={false}
+      data-form-type="other"
+      data-lpignore="true"
+      data-1p-ignore="true"
+      name={`stx-${Math.random().toString(36).slice(2, 8)}`}
       className="w-full bg-input/40 border border-border rounded-xl py-3 pl-10 pr-10 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/60 focus:shadow-[0_0_15px_hsl(189_94%_53%/0.2)] transition-all"
     />
     {trailing && (
